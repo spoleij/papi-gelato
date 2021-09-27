@@ -7,6 +7,22 @@ class Bestelling(object):                   #maak een class met object/self  zod
     aardbei , chocolade , munt , vanille, totaalHorentjes, totaalBakjes , totaalBolletjes, slagroom, sprinkels, caramel= (0,)*10
     prijsSlagroom , prijsCaramel , prijsSprinkels , aantalToppings , totaalToppings = (0,)*5
     print ('Welkom bij Papi Gelato!')
+
+    def doel (self):
+        self.vraagDoel = input ('Bent u: \n1)een particulier \n2)zakelijk \n')
+        if self.vraagDoel in ['1','particulier' ,'een particulier']:
+            self.funcBolletjes()
+        if self.vraagDoel in ['2' ,'zakelijk']:
+            self.zakelijk()
+        else:
+            print ('Sorry, dat snap ik niet...')
+            return self.doel() 
+
+    def zakelijk (self):
+        print ('De prijs van ijs per liter is voor iedere smaak €9,80 inclusief BTW\n')
+        self.hoeveelLiter = int(input ('Hoeveel liter ijs wilt u bestellen (in hele getallen)?\n'))
+        self.bonnetjeZakelijk()
+
     def funcBolletjes (self):
         try:
             self.aantalBolletjes = int(input ('Hoeveel bolletjes wilt u?\n'))
@@ -120,8 +136,20 @@ class Bestelling(object):                   #maak een class met object/self  zod
         Topping         1 x ${self.totaalToppings}        = ${round(self.totaalToppings)}  
                         ---------- +
         Totaal				= ${round(self.berekeningTot)}                  \n   """)
+        exit()
+    def bonnetjeZakelijk (self):
+        self.litersexcl = self.hoeveelLiter * 9.80
+        self.litersincl = self.litersexcl * 0.09
+        print (f"""                     
+        ---------------["Papi Gelato"]---------------
+
+        Liter           {self.hoeveelLiter} x $9.80                   = ${round(self.litersexcl)}  
+                                                    ---------- +
+        Totaal				            = ${round(self.litersexcl)}                  
+        BTW (9%)                                    = ${self.litersincl} \n""")
+
 #AFRONDEN LUKT NOG NIET HELEMAAL WANT ALS IETS 0.50 IS KRIJG JE 0. NA DE =
 
 
 obj = Bestelling()                                              #maak object en call obj.function, de eerste
-obj.funcBolletjes()
+obj.doel()

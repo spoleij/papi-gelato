@@ -1,25 +1,12 @@
-print ('Welkom bij Papi Gelato!')
-aantalBolletjes = None
-houder = None                           
-meer = None
-count = None
-totaalHorentjes = None
-totaalBakjes = None
-totaalBolletjes = None
-slagroom = None
-sprinkels = None
-caramel = None
-prijsslagroom = None
-prijsCaramel = None
-prijsSprinkels = None
-aantalToppings = None
-totaalToppings = None
-#define variables hier / binnen de class. (zet je dit binnen de class dan krijg je een error)
+aantalBolletjes , houder , meer , count , totaalHorentjes , totaalBakjes , totaalBolletjes = (None,)*7
+slagroom , sprinkels , caramel , prijsslagroom , prijsCaramel , prijsSprinkels , aantalToppings , totaalToppings = (None,)*8
+#define variables hier / binnen de class. (zet je dit binnen de class dan krijg je soms een error ???)
 
 class Bestelling(object):                   #maak een class met object/self  zodat de variables binnen elkaars function gebruikt kunnen worden 
     count = 0
     aardbei , chocolade , munt , vanille, totaalHorentjes, totaalBakjes , totaalBolletjes, slagroom, sprinkels, caramel= (0,)*10
     prijsSlagroom , prijsCaramel , prijsSprinkels , aantalToppings , totaalToppings = (0,)*5
+    print ('Welkom bij Papi Gelato!')
     def funcBolletjes (self):
         try:
             self.aantalBolletjes = int(input ('Hoeveel bolletjes wilt u?\n'))

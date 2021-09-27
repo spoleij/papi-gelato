@@ -1,4 +1,4 @@
-print ('Welkom bij Papi Gelato! Je mag alle smaken kiezen!')
+print ('Welkom bij Papi Gelato!')
 aantalBolletjes = None
 houder = None                           
 meer = None

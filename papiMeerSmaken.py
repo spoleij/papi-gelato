@@ -4,7 +4,7 @@ slagroom , sprinkels , caramel , prijsslagroom , prijsCaramel , prijsSprinkels ,
 
 class Bestelling(object):                   #maak een class met object/self  zodat de variables binnen elkaars function gebruikt kunnen worden 
     count = 0
-    aardbei , chocolade , munt , vanille, totaalHorentjes, totaalBakjes , totaalBolletjes, slagroom, sprinkels, caramel= (0,)*10
+    aardbei , chocolade  , vanille, totaalHorentjes, totaalBakjes , totaalBolletjes, slagroom, sprinkels, caramel= (0,)*10
     prijsSlagroom , prijsCaramel , prijsSprinkels , aantalToppings , totaalToppings = (0,)*5
     print ('Welkom bij Papi Gelato!')
 
@@ -15,7 +15,7 @@ class Bestelling(object):                   #maak een class met object/self  zod
         if self.vraagDoel in ['2' ,'zakelijk']:
             self.zakelijk()
         else:
-            print ('Sorry, dat snap ik niet...')
+            print ('Sorry dat is geen optie die we aanbieden...')
             return self.doel() 
 
     def zakelijk (self):
@@ -36,14 +36,14 @@ class Bestelling(object):                   #maak een class met object/self  zod
                 print ('Sorry, zulke grote bakjes/horentjes hebben we niet')
                 return self.funcBolletjes()
         except ValueError:
-            print ('Sorry, dat snap ik niet...')
+            print ('Sorry dat is geen optie die we aanbieden...')
             return self.funcBolletjes()
                                                         
     def funcSmaak (self):                               # gefixt! de count variable moest buiten deze def, maar binnen de class!                                                      
         for i in range (self.aantalBolletjes):          # define de count varible (niet self.count) IN DE CLASS!! ZIE REGEL BOVENAAN 
             self.count = self.count +1                  # ik had hier nog niet over global scopes/variables geleerd ^^^^
             print (f"""Welke smaak wilt u voor bolletje nummer {self.count}?
-            \nA) Aardbei \nC) Chocolade \nM) Munt \nV) Vanille  \n""")      # error als je opnieuw besteld gaan nummers door?
+            \nA) Aardbei \nC) Chocolade \nV) Vanille  \n""")      # error als je opnieuw besteld gaan nummers door?
             self.smaak = input()                                               # gefixt. bij OPNIEUW self.count = 0 gedaan
             if self.smaak in ['a' ,'A', 'aardbei']:
                 self.aardbei = self.aardbei + 1             #smaken los gedaan voor het geval dat
@@ -53,16 +53,12 @@ class Bestelling(object):                   #maak een class met object/self  zod
                 self.chocolade = self.chocolade + 1
                 self.totaalBolletjes = self.totaalBolletjes + 1
                 
-            elif self.smaak in ['m', 'M', 'munt' ,'mint', 'pepermunt']:
-                self.munt = self.munt + 1
-                self.totaalBolletjes = self.totaalBolletjes + 1
-                
             elif self.smaak in ['v', 'V', 'vanille']:
                 self.vanille = self.vanille + 1
                 self.totaalBolletjes = self.totaalBolletjes + 1
             
             else:
-                print ('Sorry, dat snap ik niet...')
+                print ('Sorry dat is geen optie die we aanbieden...')
                 return self.funcSmaak()           
         self.funcHouder()        
 
@@ -77,7 +73,7 @@ class Bestelling(object):                   #maak een class met object/self  zod
             self.totaalBakjes = self.totaalBakjes + 1
             self.topping()
         else:
-            print ('Sorry, dat snap ik niet...')
+            print ('Sorry dat is geen optie die we aanbieden...')
             return self.funcHouder()
     def topping (self):
             self.welkeTop = input ("Wat voor topping wilt u?: \nA) Geen, \nB) Slagroom, \nC) Sprinkels \nD) Caramel Saus\n")
@@ -103,7 +99,7 @@ class Bestelling(object):                   #maak een class met object/self  zod
                     self.prijsCaramel = self.prijsCaramel + 0.90
             
             else:
-                print ('Sorry, dat snap ik niet...')
+                print ('Sorry dat is geen optie die we aanbieden...')
                 return self.topping()    
             self.funcMeer()       
 
@@ -115,11 +111,11 @@ class Bestelling(object):                   #maak een class met object/self  zod
         if self.meer in ['n' , 'N' , 'nee' , 'Nee' , 'NEE']: #fout in code. als je eerst J doet, dat doet de 2e N het niet. maar de 3e weer wel?
             self.bonnetje()                           
         else:                                           # gefixt! elif vervangen door if.
-            print ('Sorry, dat snap ik niet...')
+            print ('Sorry dat is geen optie die we aanbieden...')
             return self.funcMeer()
                                         # v GEFIXT!! return self.funcBolletjes IPV zonder return ervoor!!!
     def bonnetje (self):                # fout!! hij print een bonnetje voor elke keer dat je nog een keer bolletjes hebt besteld
-        self.berekeningBol = self.totaalBolletjes * 1.10
+        self.berekeningBol = self.totaalBolletjes * 0.95
         self.berekeningHor = self.totaalHorentjes * 1.25
         self.berekeningBak = self.totaalBakjes * 0.75
         self.berekeningTot = self.berekeningBol + self.berekeningHor + self.berekeningBak + self.totaalToppings
@@ -130,7 +126,7 @@ class Bestelling(object):                   #maak een class met object/self  zod
         print (f"""                     
         ---------------["Papi Gelato"]---------------
 
-        Bolletjes	{self.totaalBolletjes} x $1.10  	= ${round(self.berekeningBol,2)}  
+        Bolletjes	{self.totaalBolletjes} x $0.95  	= ${round(self.berekeningBol,2)}  
         Horentjes	{self.totaalHorentjes} x $1.25  	= ${round(self.berekeningHor,2)}
         Bakjes		{self.totaalBakjes} x $0.75       = ${round(self.berekeningBak,2)}
         Topping         1 x ${self.totaalToppings}        = ${round(self.totaalToppings)}  
@@ -139,14 +135,14 @@ class Bestelling(object):                   #maak een class met object/self  zod
         exit()
     def bonnetjeZakelijk (self):
         self.litersexcl = self.hoeveelLiter * 9.80
-        self.litersincl = self.litersexcl * 0.09
+        self.litersincl = self.litersexcl * 0.06
         print (f"""                     
         ---------------["Papi Gelato"]---------------
 
         Liter           {self.hoeveelLiter} x $9.80                   = ${round(self.litersexcl)}  
                                                     ---------- +
         Totaal				            = ${round(self.litersexcl)}                  
-        BTW (9%)                                    = ${self.litersincl} \n""")
+        BTW (6%)                                    = ${self.litersincl} \n""")
 
 #AFRONDEN LUKT NOG NIET HELEMAAL WANT ALS IETS 0.50 IS KRIJG JE 0. NA DE =
 
